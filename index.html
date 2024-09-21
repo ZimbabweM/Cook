@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Справочник и планировщик питания</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Справочник продуктов и планировщик питания</h1>
+
+    <!-- Форма для добавления нового продукта в справочник -->
+    <h2>Добавить продукт в справочник</h2>
+    <form id="productForm">
+        <label for="name">Название продукта:</label>
+        <input type="text" id="name" required>
+        
+        <label for="calories">Калории:</label>
+        <input type="number" id="calories" required>
+        
+        <label for="carbs">Углеводы (граммы):</label>
+        <input type="number" id="carbs" required>
+        
+        <button type="submit">Добавить продукт</button>
+    </form>
+
+    <!-- Список продуктов из справочника -->
+    <h2>Справочник продуктов</h2>
+    <table id="productDirectoryTable">
+        <thead>
+            <tr>
+                <th>Название</th>
+                <th>Калории</th>
+                <th>Углеводы (г)</th>
+                <th>Удалить</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Продукты из справочника будут добавляться сюда -->
+        </tbody>
+    </table>
+
+    <!-- Форма для выбора продукта и приёма пищи -->
+    <h2>Добавить продукты в планировщик</h2>
+    <label for="mealTime">Выберите приём пищи:</label>
+    <select id="mealTime" required>
+        <option value="breakfast">Завтрак</option>
+        <option value="lunch">Обед</option>
+        <option value="dinner">Ужин</option>
+        <option value="snack">Перекус</option>
+    </select>
+
+    <!-- Выпадающий список для выбора продуктов -->
+    <label for="productSelect">Выберите продукт:</label>
+    <select id="productSelect" required>
+        <option value="" disabled selected>Выберите продукт</option>
+        <!-- Продукты из справочника будут динамически добавляться сюда -->
+    </select>
+
+    <button id="addToMealBtn">Добавить в приём пищи</button>
+
+    <!-- Таблицы для приёмов пищи -->
+    <h2>Завтрак</h2>
+    <table id="breakfastTable">
+        <thead>
+            <tr>
+                <th>Продукт</th>
+                <th>Калории</th>
+                <th>Углеводы</th>
+                <th>Удалить</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+    <p>Общие калории: <span id="breakfastCalories">0</span> ккал, Углеводы: <span id="breakfastCarbs">0</span> г</p>
+
+    <h2>Обед</h2>
+    <table id="lunchTable">
+        <thead>
+            <tr>
+                <th>Продукт</th>
+                <th>Калории</th>
+                <th>Углеводы</th>
+                <th>Удалить</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+    <p>Общие калории: <span id="lunchCalories">0</span> ккал, Углеводы: <span id="lunchCarbs">0</span> г</p>
+
+    <h2>Ужин</h2>
+    <table id="dinnerTable">
+        <thead>
+            <tr>
+                <th>Продукт</th>
+                <th>Калории</th>
+                <th>Углеводы</th>
+                <th>Удалить</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+    <p>Общие калории: <span id="dinnerCalories">0</span> ккал, Углеводы: <span id="dinnerCarbs">0</span> г</p>
+
+    <h2>Перекус</h2>
+    <table id="snackTable">
+        <thead>
+            <tr>
+                <th>Продукт</th>
+                <th>Калории</th>
+                <th>Углеводы</th>
+                <th>Удалить</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+    <p>Общие калории: <span id="snackCalories">0</span> ккал, Углеводы: <span id="snackCarbs">0</span> г</p>
+
+    <script src="script.js"></script>
+</body>
+</html>
