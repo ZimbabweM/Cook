@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     loadProductDirectory();
     loadMealsFromLocalStorage();
-    updateAllTotals();  // Обновляем общие калории и углеводы при загрузке
+    updateAllTotals();
 });
 
 document.getElementById('productForm').addEventListener('submit', function(event) {
@@ -13,23 +13,44 @@ document.getElementById('productForm').addEventListener('submit', function(event
 
     addProductToDirectory(name, calories, carbs);
     saveProductToDirectory(name, calories, carbs);
-    updateProductSelect();
+    updateAllProductSelects();
 
     document.getElementById('productForm').reset();
 });
 
-document.getElementById('addToMealBtn').addEventListener('click', function() {
-    const mealTime = document.getElementById('mealTime').value;
-    const productSelect = document.getElementById('productSelect');
-    const selectedProduct = productSelect.options[productSelect.selectedIndex].value;
+document.addEventListener('DOMContentLoaded', () => {
+    loadProductDirectory();
+    loadMealsFromLocalStorage();
+    updateAllTotals();
+
+    // Обработчик для селектора
+    document.getElementById('toggleProductForm').addEventListener('change', function() {
+        const productFormContainer = document.getElementById('productFormContainer');
+        if (this.value === 'show') {
+            productFormContainer.style.display = 'block';
+        } else {
+            productFormContainer.style.display = 'none';
+        }
+    });
+});
+
+// Кнопки добавления продуктов в разные приёмы пищи
+document.getElementById('addToBreakfastBtn').addEventListener('click', () => addToMeal('breakfast'));
+document.getElementById('addToLunchBtn').addEventListener('click', () => addToMeal('lunch'));
+document.getElementById('addToDinnerBtn').addEventListener('click', () => addToMeal('dinner'));
+document.getElementById('addToSnackBtn').addEventListener('click', () => addToMeal('snack'));
+
+function addToMeal(mealTime) {
+    const productSelect = document.getElementById(`${mealTime}Select`);
+    const selectedProduct = productSelect.value;
 
     if (selectedProduct) {
         const [name, calories, carbs] = selectedProduct.split('|');
         addProductToMeal(name, parseInt(calories), parseInt(carbs), mealTime);
         saveProductToMeal(name, parseInt(calories), parseInt(carbs), mealTime);
-        updateMealTotals(mealTime);  // Обновляем общие калории и углеводы
+        updateMealTotals(mealTime);
     }
-});
+}
 
 function addProductToDirectory(name, calories, carbs) {
     const table = document.getElementById('productDirectoryTable').getElementsByTagName('tbody')[0];
@@ -44,7 +65,7 @@ function addProductToDirectory(name, calories, carbs) {
     newRow.querySelector('.delete-btn').addEventListener('click', function() {
         table.deleteRow(newRow.rowIndex - 1);
         removeProductFromDirectory(name, calories, carbs);
-        updateProductSelect();
+        updateAllProductSelects();
     });
 }
 
@@ -59,11 +80,15 @@ function loadProductDirectory() {
     products.forEach(product => {
         addProductToDirectory(product.name, product.calories, product.carbs);
     });
-    updateProductSelect();
+    updateAllProductSelects();
 }
 
-function updateProductSelect() {
-    const productSelect = document.getElementById('productSelect');
+function updateAllProductSelects() {
+    ['breakfast', 'lunch', 'dinner', 'snack'].forEach(updateProductSelect);
+}
+
+function updateProductSelect(mealTime) {
+    const productSelect = document.getElementById(`${mealTime}Select`);
     productSelect.innerHTML = `<option value="" disabled selected>Выберите продукт</option>`;
     const products = JSON.parse(localStorage.getItem('productDirectory')) || [];
 
@@ -88,7 +113,7 @@ function addProductToMeal(name, calories, carbs, mealTime) {
     newRow.querySelector('.delete-btn').addEventListener('click', function() {
         table.deleteRow(newRow.rowIndex - 1);
         removeProductFromMeal(name, calories, carbs, mealTime);
-        updateMealTotals(mealTime);  // Обновляем общие калории и углеводы после удаления
+        updateMealTotals(mealTime);
     });
 }
 
@@ -108,7 +133,7 @@ function loadMealsFromLocalStorage() {
             addProductToMeal(product.name, product.calories, product.carbs, mealTime);
         });
     }
-    updateAllTotals();  // Обновляем общие калории и углеводы для всех приёмов пищи
+    updateAllTotals();
 }
 
 function removeProductFromMeal(name, calories, carbs, mealTime) {

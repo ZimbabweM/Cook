@@ -1,94 +1,133 @@
+/* Общие стили */
 body {
     font-family: 'Arial', sans-serif;
-    background-color: #f4f4f4;
+    background-color: #f9f9f9;
+    background-image: url('piu.png'); /* Замените на путь к вашему изображению */
+    background-size: cover; /* Покрытие всего экрана */
+    background-repeat: no-repeat; /* Не повторять изображение */
+    background-attachment: fixed; /* Зафиксировать изображение при прокрутке */
     color: #333;
     margin: 0;
     padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Центрируем содержимое */
 }
 
+/* Заголовки */
 h1 {
-    text-align: center;
     color: #2c3e50;
-}
-
-h2 {
-    color: #2980b9;
-    border-bottom: 2px solid #2980b9;
-    padding-bottom: 10px;
-}
-
-form {
-    background: #fff;
-    padding: 15px;
-    border-radius: 5px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     margin-bottom: 20px;
 }
 
-label {
-    display: block;
-    margin: 10px 0 5px;
+h2 {
+    color: #34495e;
+    margin-top: 30px;
+}
+
+/* Контейнер для формы добавления продукта */
+#productFormContainer {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    width: 300px; /* Ширина формы */
+}
+
+/* Стили селектора */
+#toggleProductForm {
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
+
+/* Стили формы */
+form {
+    display: flex;
+    flex-direction: column;
 }
 
 input[type="text"],
 input[type="number"],
 select {
-    width: calc(100% - 20px);
+    width: 100%;
     padding: 10px;
-    margin-bottom: 10px;
+    margin: 5px 0;
     border: 1px solid #ccc;
-    border-radius: 5px;
+    border-radius: 4px;
 }
 
+/* Кнопки */
 button {
-    background-color: #2980b9;
-    color: #fff;
-    border: none;
+    background-color: #3498db;
+    color: white;
     padding: 10px 15px;
-    border-radius: 5px;
+    border: none;
+    border-radius: 4px;
     cursor: pointer;
+    transition: background-color 0.3s; /* Плавный переход цвета */
 }
 
 button:hover {
-    background-color: #3498db;
+    background-color: #2980b9;
 }
 
+/* Стили таблиц */
 table {
-    width: 100%;
+    width: 80%; /* Уменьшенная ширина таблиц */
     border-collapse: collapse;
-    margin-bottom: 20px;
-    background: #fff;
+    margin-top: 20px;
+    background: white; /* Фон таблицы */
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
 }
 
 th, td {
     padding: 12px;
     text-align: left;
-    border-bottom: 1px solid #ddd;
+    border: 1px solid #ddd;
 }
 
 th {
-    background-color: #2980b9;
-    color: #fff;
+    background-color: #3498db;
+    color: white;
+    border-top-left-radius: 8px; /* Закругление углов */
+    border-top-right-radius: 8px;
 }
 
 tr:hover {
     background-color: #f1f1f1;
 }
 
-.delete-btn {
-    background-color: #e74c3c;
-    color: #fff;
-    border: none;
-    padding: 5px 10px;
+/* Отступы для секций с приёмами пищи */
+h2:nth-of-type(3),
+h2:nth-of-type(5),
+h2:nth-of-type(7),
+h2:nth-of-type(9) {
+    margin-top: 50px;
+}
+
+/* Пример для текста с полупрозрачным фоном */
+.text-container {
+    background-color: rgba(255, 255, 255, 0.7); /* Полупрозрачный белый фон */
+    padding: 10px;
     border-radius: 5px;
-    cursor: pointer;
+    color: #333; /* Цвет текста */
 }
 
-.delete-btn:hover {
-    background-color: #c0392b;
-}
+/* Мобильная адаптация */
+@media (max-width: 600px) {
+    body {
+        padding: 10px;
+    }
 
-p {
-    font-size: 1.1em;
+    #productFormContainer {
+        width: 100%; /* Полная ширина на мобильных устройствах */
+    }
+
+    table {
+        width: 100%; /* Полная ширина таблиц */
+    }
 }
